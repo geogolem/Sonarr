@@ -14,10 +14,12 @@ namespace NzbDrone.Api.Notifications
             base.MapToResource(resource, definition);
             
             resource.OnGrab = definition.OnGrab;
+            resource.OnDelete = definition.OnDelete;
             resource.OnDownload = definition.OnDownload;
             resource.OnUpgrade = definition.OnUpgrade;
             resource.OnRename = definition.OnRename;
             resource.SupportsOnGrab = definition.SupportsOnGrab;
+            resource.SupportsOnDelete = definition.SupportsOnDelete;
             resource.SupportsOnDownload = definition.SupportsOnDownload;
             resource.SupportsOnUpgrade = definition.SupportsOnUpgrade;
             resource.SupportsOnRename = definition.SupportsOnRename;
@@ -29,10 +31,12 @@ namespace NzbDrone.Api.Notifications
             base.MapToModel(definition, resource);
 
             definition.OnGrab = resource.OnGrab;
+            definition.OnDelete = resource.OnDelete;
             definition.OnDownload = resource.OnDownload;
             definition.OnUpgrade = resource.OnUpgrade;
             definition.OnRename = resource.OnRename;
             definition.SupportsOnGrab = resource.SupportsOnGrab;
+            definition.SupportsOnDelete = resource.SupportsOnDelete;
             definition.SupportsOnDownload = resource.SupportsOnDownload;
             definition.SupportsOnUpgrade = resource.SupportsOnUpgrade;
             definition.SupportsOnRename = resource.SupportsOnRename;

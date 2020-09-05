@@ -8,6 +8,7 @@ namespace NzbDrone.Core.Notifications
         string Link { get; }
 
         void OnGrab(GrabMessage grabMessage);
+        void OnDelete(DeleteMessage deleteMessage);
         void OnDownload(DownloadMessage message);
         void OnRename(Series series);
         void OnHealthIssue(HealthCheck.HealthCheck healthCheck);
@@ -16,6 +17,7 @@ namespace NzbDrone.Core.Notifications
         bool SupportsOnDownload { get; }
         bool SupportsOnUpgrade { get; }
         bool SupportsOnRename { get; }
+        bool SupportsOnDelete { get; }
         bool SupportsOnHealthIssue { get; }
     }
 }

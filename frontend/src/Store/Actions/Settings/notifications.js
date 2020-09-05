@@ -103,6 +103,7 @@ export default {
     [SELECT_NOTIFICATION_SCHEMA]: (state, { payload }) => {
       return selectProviderSchema(state, section, payload, (selectedSchema) => {
         selectedSchema.onGrab = selectedSchema.supportsOnGrab;
+        selectedSchema.onDelete = selectedSchema.supportsOnDelete;
         selectedSchema.onDownload = selectedSchema.supportsOnDownload;
         selectedSchema.onUpgrade = selectedSchema.supportsOnUpgrade;
         selectedSchema.onRename = selectedSchema.supportsOnRename;

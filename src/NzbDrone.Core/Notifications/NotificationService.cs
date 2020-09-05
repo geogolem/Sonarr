@@ -105,6 +105,29 @@ namespace NzbDrone.Core.Notifications
             return false;
         }
 
+        public void Handle(EpisodeFileDeletedEvent message)
+        {
+            var deleteMessage = new DeleteMessage();
+            deleteMessage.Message = GetMessage(message.EpisodeFile.Series, message.EpisodeFile.Episodes, message.EpisodeFile.Quality);
+            deleteMessage.EpisodeFile = message.EpisodeFile;
+            deleteMessage.Series = message.EpisodeFile.Series;
+            deleteMessage.Reason = message.Reason;
+
+            foreach (var notification in _notificationFactory.OnDeleteEnabled())
+            {
+                try
+                {
+                    if (ShouldHandleSeries(notification.Definition, message.EpisodeFile.Series))
+                    {
+                        notification.OnDelete(deleteMessage);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    _logger.Warn(ex, "Unable to send OnDelete notification to: " + notification.Definition.Name);
+                }
+            }
+        }
         public void Handle(EpisodeGrabbedEvent message)
         {
             var grabMessage = new GrabMessage

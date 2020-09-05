@@ -39,11 +39,13 @@ function EditNotificationModalContent(props) {
     implementationName,
     name,
     onGrab,
+    onDelete,
     onDownload,
     onUpgrade,
     onRename,
     onHealthIssue,
     supportsOnGrab,
+    supportsOnDelete,
     supportsOnDownload,
     supportsOnUpgrade,
     supportsOnRename,
@@ -104,6 +106,19 @@ function EditNotificationModalContent(props) {
                   helpText="Be notified when episodes are available for download and has been sent to a download client"
                   isDisabled={!supportsOnGrab.value}
                   {...onGrab}
+                  onChange={onInputChange}
+                />
+              </FormGroup>
+
+              <FormGroup>
+                <FormLabel>On Delete</FormLabel>
+
+                <FormInputGroup
+                  type={inputTypes.CHECK}
+                  name="onDelete"
+                  helpText="Be notified when episodes files are deleted"
+                  isDisabled={!supportsOnDelete.value}
+                  {...onDelete}
                   onChange={onInputChange}
                 />
               </FormGroup>

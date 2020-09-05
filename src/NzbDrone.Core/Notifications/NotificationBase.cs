@@ -39,6 +39,11 @@ namespace NzbDrone.Core.Notifications
 
         }
 
+        public virtual void OnDelete(DeleteMessage message)
+        {
+
+        }
+
         public virtual void OnRename(Series series)
         {
 
@@ -57,6 +62,7 @@ namespace NzbDrone.Core.Notifications
         public bool SupportsOnGrab => HasConcreteImplementation("OnGrab");
         public bool SupportsOnRename => HasConcreteImplementation("OnRename");
         public bool SupportsOnDownload => HasConcreteImplementation("OnDownload");
+        public bool SupportsOnDelete => HasConcreteImplementation("OnDelete");
         public bool SupportsOnUpgrade => SupportsOnDownload;
         public bool SupportsOnHealthIssue => HasConcreteImplementation("OnHealthIssue");
 

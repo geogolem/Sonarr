@@ -10,6 +10,7 @@ namespace NzbDrone.Core.Notifications
     public interface INotificationFactory : IProviderFactory<INotification, NotificationDefinition>
     {
         List<INotification> OnGrabEnabled();
+        List<INotification> OnDeleteEnabled();
         List<INotification> OnDownloadEnabled();
         List<INotification> OnUpgradeEnabled();
         List<INotification> OnRenameEnabled();
@@ -31,6 +32,10 @@ namespace NzbDrone.Core.Notifications
         public List<INotification> OnDownloadEnabled()
         {
             return GetAvailableProviders().Where(n => ((NotificationDefinition)n.Definition).OnDownload).ToList();
+        }
+        public List<INotification> OnDeleteEnabled()
+        {
+            return GetAvailableProviders().Where(n => ((NotificationDefinition)n.Definition).OnDelete).ToList();
         }
 
         public List<INotification> OnUpgradeEnabled()
@@ -56,6 +61,7 @@ namespace NzbDrone.Core.Notifications
             definition.SupportsOnDownload = provider.SupportsOnDownload;
             definition.SupportsOnUpgrade = provider.SupportsOnUpgrade;
             definition.SupportsOnRename = provider.SupportsOnRename;
+            definition.SupportsOnDelete = provider.SupportsOnDelete;
             definition.SupportsOnHealthIssue = provider.SupportsOnHealthIssue;
         }
     }

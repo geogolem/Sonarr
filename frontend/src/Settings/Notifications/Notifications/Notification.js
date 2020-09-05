@@ -55,11 +55,13 @@ class Notification extends Component {
       id,
       name,
       onGrab,
+      onDelete,
       onDownload,
       onUpgrade,
       onRename,
       onHealthIssue,
       supportsOnGrab,
+      supportsOnDelete,
       supportsOnDownload,
       supportsOnUpgrade,
       supportsOnRename,
@@ -78,6 +80,13 @@ class Notification extends Component {
 
         {
           supportsOnGrab && onGrab &&
+            <Label kind={kinds.SUCCESS}>
+              On Grab
+            </Label>
+        }
+
+        {
+          supportsOnDelete && onDelete &&
             <Label kind={kinds.SUCCESS}>
               On Grab
             </Label>
@@ -112,7 +121,7 @@ class Notification extends Component {
         }
 
         {
-          !onGrab && !onDownload && !onRename && !onHealthIssue &&
+          !onGrab && !onDownload && !onRename && !onHealthIssue && !onDelete &&
             <Label
               kind={kinds.DISABLED}
               outline={true}
@@ -146,11 +155,13 @@ Notification.propTypes = {
   id: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   onGrab: PropTypes.bool.isRequired,
+  onDelete: PropTypes.bool.isRequired,
   onDownload: PropTypes.bool.isRequired,
   onUpgrade: PropTypes.bool.isRequired,
   onRename: PropTypes.bool.isRequired,
   onHealthIssue: PropTypes.bool.isRequired,
   supportsOnGrab: PropTypes.bool.isRequired,
+  supportsOnDelete: PropTypes.bool.isRequired,
   supportsOnDownload: PropTypes.bool.isRequired,
   supportsOnUpgrade: PropTypes.bool.isRequired,
   supportsOnRename: PropTypes.bool.isRequired,

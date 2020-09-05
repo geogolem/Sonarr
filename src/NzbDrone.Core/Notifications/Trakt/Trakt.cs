@@ -29,6 +29,14 @@ namespace NzbDrone.Core.Notifications.Trakt
             _traktService.AddEpisodeToCollection(Settings, message.Series, message.EpisodeFile);
         }
 
+        public override void OnDelete(DeleteMessage message)
+        {
+            //if (message.Reason != MediaFiles.DeleteMediaFileReason.Upgrade)
+            //{
+            _traktService.RemoveEpisodeFromCollection(Settings, message.Series, message.EpisodeFile);
+            //}
+        }
+
         public override ValidationResult Test()
         {
             var failures = new List<ValidationFailure>();

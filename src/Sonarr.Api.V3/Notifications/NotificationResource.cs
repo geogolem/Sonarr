@@ -6,11 +6,13 @@ namespace Sonarr.Api.V3.Notifications
     {
         public string Link { get; set; }
         public bool OnGrab { get; set; }
+        public bool OnDelete { get; set; }
         public bool OnDownload { get; set; }
         public bool OnUpgrade { get; set; }
         public bool OnRename { get; set; }
         public bool OnHealthIssue { get; set; }
         public bool SupportsOnGrab { get; set; }
+        public bool SupportsOnDelete { get; set; }
         public bool SupportsOnDownload { get; set; }
         public bool SupportsOnUpgrade { get; set; }
         public bool SupportsOnRename { get; set; }
@@ -28,11 +30,13 @@ namespace Sonarr.Api.V3.Notifications
             var resource = base.ToResource(definition);
 
             resource.OnGrab = definition.OnGrab;
+            resource.OnDelete = definition.OnDelete;
             resource.OnDownload = definition.OnDownload;
             resource.OnUpgrade = definition.OnUpgrade;
             resource.OnRename = definition.OnRename;
             resource.OnHealthIssue = definition.OnHealthIssue;
             resource.SupportsOnGrab = definition.SupportsOnGrab;
+            resource.SupportsOnDelete = definition.SupportsOnDelete;
             resource.SupportsOnDownload = definition.SupportsOnDownload;
             resource.SupportsOnUpgrade = definition.SupportsOnUpgrade;
             resource.SupportsOnRename = definition.SupportsOnRename;
@@ -49,11 +53,13 @@ namespace Sonarr.Api.V3.Notifications
             var definition = base.ToModel(resource);
 
             definition.OnGrab = resource.OnGrab;
+            definition.OnDelete = resource.OnDelete;
             definition.OnDownload = resource.OnDownload;
             definition.OnUpgrade = resource.OnUpgrade;
             definition.OnRename = resource.OnRename;
             definition.OnHealthIssue = resource.OnHealthIssue;
             definition.SupportsOnGrab = resource.SupportsOnGrab;
+            definition.SupportsOnDelete = resource.SupportsOnDelete;
             definition.SupportsOnDownload = resource.SupportsOnDownload;
             definition.SupportsOnUpgrade = resource.SupportsOnUpgrade;
             definition.SupportsOnRename = resource.SupportsOnRename;
