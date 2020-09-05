@@ -15,6 +15,7 @@ namespace NzbDrone.Core.Notifications
 {
     public class NotificationService
         : IHandle<EpisodeGrabbedEvent>,
+          IHandle<EpisodeFileDeletedEvent>,
           IHandle<EpisodeImportedEvent>,
           IHandle<SeriesRenamedEvent>,
           IHandle<HealthCheckFailedEvent>,
