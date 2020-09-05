@@ -37,7 +37,7 @@ namespace NzbDrone.Core.Notifications.Trakt
             }
             else if (message.Reason != MediaFiles.DeleteMediaFileReason.Upgrade)
             {
-                _traktService.RemoveEpisodeFromCollection(Settings, message.Series, message.EpisodeFile);
+                _traktService.RemoveEpisodeFromCollection(Settings, message.EpisodeFile.Series, message.EpisodeFile);
             }
         }
 

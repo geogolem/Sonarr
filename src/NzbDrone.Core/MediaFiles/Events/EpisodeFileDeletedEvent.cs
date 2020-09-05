@@ -12,7 +12,6 @@ namespace NzbDrone.Core.MediaFiles.Events
         public EpisodeFileDeletedEvent(EpisodeFile episodeFile, DeleteMediaFileReason reason)
         {
             EpisodeFile = episodeFile;
-            Series = episodeFile.Series;
             Reason = reason;
         }
         public EpisodeFileDeletedEvent(Series series, DeleteMediaFileReason reason)
