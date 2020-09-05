@@ -103,6 +103,11 @@ namespace NzbDrone.Core.Extras.Files
 
         public void Handle(EpisodeFileDeletedEvent message)
         {
+            if (message.Reason == DeleteMediaFileReason.SeriesDeletion)
+            {
+                return;
+            }
+
             var episodeFile = message.EpisodeFile;
 
             if (message.Reason == DeleteMediaFileReason.NoLinkedEpisodes)

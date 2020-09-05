@@ -31,10 +31,14 @@ namespace NzbDrone.Core.Notifications.Trakt
 
         public override void OnDelete(DeleteMessage message)
         {
-            //if (message.Reason != MediaFiles.DeleteMediaFileReason.Upgrade)
-            //{
-            _traktService.RemoveEpisodeFromCollection(Settings, message.Series, message.EpisodeFile);
-            //}
+            if (message.Reason == MediaFiles.DeleteMediaFileReason.SeriesDeletion)
+            {
+                _traktService.RemoveSeriesFromCollection(Settings, message.Series);
+            }
+            else if (message.Reason != MediaFiles.DeleteMediaFileReason.Upgrade)
+            {
+                _traktService.RemoveEpisodeFromCollection(Settings, message.Series, message.EpisodeFile);
+            }
         }
 
         public override ValidationResult Test()

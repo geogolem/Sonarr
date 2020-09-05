@@ -211,6 +211,10 @@ namespace NzbDrone.Core.Tv
 
         public void Handle(EpisodeFileDeletedEvent message)
         {
+            if (message.Reason == DeleteMediaFileReason.SeriesDeletion)
+            {
+                return;
+            }
             foreach (var episode in GetEpisodesByFileId(message.EpisodeFile.Id))
             {
                 _logger.Debug("Detaching episode {0} from file.", episode.Id);

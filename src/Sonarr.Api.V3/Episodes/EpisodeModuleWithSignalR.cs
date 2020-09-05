@@ -140,6 +140,10 @@ namespace Sonarr.Api.V3.Episodes
 
         public void Handle(EpisodeFileDeletedEvent message)
         {
+            if (message.Reason == NzbDrone.Core.MediaFiles.DeleteMediaFileReason.SeriesDeletion)
+            {
+                return;
+            }
             foreach (var episode in message.EpisodeFile.Episodes.Value)
             {
                 BroadcastResourceChange(ModelAction.Updated, episode.Id);

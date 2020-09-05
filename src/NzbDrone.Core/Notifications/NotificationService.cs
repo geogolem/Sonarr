@@ -109,16 +109,23 @@ namespace NzbDrone.Core.Notifications
         public void Handle(EpisodeFileDeletedEvent message)
         {
             var deleteMessage = new DeleteMessage();
-            deleteMessage.Message = GetMessage(message.EpisodeFile.Series, message.EpisodeFile.Episodes, message.EpisodeFile.Quality);
-            deleteMessage.EpisodeFile = message.EpisodeFile;
-            deleteMessage.Series = message.EpisodeFile.Series;
+            if (message.Reason == MediaFiles.DeleteMediaFileReason.SeriesDeletion)
+            {
+                deleteMessage.Message = message.Series.Title;
+                deleteMessage.Series = message.Series;
+            }
+            else
+            {
+                deleteMessage.Message = GetMessage(message.EpisodeFile.Series, message.EpisodeFile.Episodes, message.EpisodeFile.Quality);
+                deleteMessage.EpisodeFile = message.EpisodeFile;
+            }
             deleteMessage.Reason = message.Reason;
 
             foreach (var notification in _notificationFactory.OnDeleteEnabled())
             {
                 try
                 {
-                    if (ShouldHandleSeries(notification.Definition, message.EpisodeFile.Series))
+                    if (ShouldHandleSeries(notification.Definition, message.Series))
                     {
                         notification.OnDelete(deleteMessage);
                     }

@@ -158,6 +158,11 @@ namespace Sonarr.Api.V3.EpisodeFiles
 
         public void Handle(EpisodeFileDeletedEvent message)
         {
+            if (message.Reason == DeleteMediaFileReason.SeriesDeletion)
+            {
+                return;
+            }
+            
             BroadcastResourceChange(ModelAction.Deleted, message.EpisodeFile.Id);
         }
     }

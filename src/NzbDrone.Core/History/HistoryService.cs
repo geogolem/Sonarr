@@ -253,6 +253,10 @@ namespace NzbDrone.Core.History
                 _logger.Debug("Removing episode file from DB as part of cleanup routine, not creating history event.");
                 return;
             }
+            else if (message.Reason ==DeleteMediaFileReason.SeriesDeletion)
+            {
+                return;
+            }
             else if (message.Reason == DeleteMediaFileReason.ManualOverride)
             {
                 _logger.Debug("Removing episode file from DB as part of manual override of existing file, not creating history event.");

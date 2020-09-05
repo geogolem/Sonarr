@@ -23,6 +23,7 @@ namespace NzbDrone.Core.Notifications.Trakt
         TraktAuthRefreshResource RefreshAuthToken(string refreshToken);
         void AddEpisodeToCollection(TraktSettings settings, Series series, EpisodeFile episodeFile);
         void RemoveEpisodeFromCollection(TraktSettings settings, Series series, EpisodeFile episodeFile);
+        void RemoveSeriesFromCollection(TraktSettings settings, Series series);
         string GetUserName(string accessToken);
         ValidationFailure Test(TraktSettings settings);
     }
@@ -83,6 +84,26 @@ namespace NzbDrone.Core.Notifications.Trakt
             }
         }
 
+        public void RemoveSeriesFromCollection(TraktSettings settings, Series series)
+        {
+            var payload = new TraktCollectShowsResource
+            {
+                Shows = new List<TraktCollectShow>()
+            };
+
+            payload.Shows.Add(new TraktCollectShow
+            {
+                Title = series.Title,
+                Year = series.Year,
+                Ids = new TraktShowIdsResource
+                {
+                    Tvdb = series.TvdbId,
+                    Imdb = series.ImdbId ?? "",
+                },
+            }); ;
+
+            _proxy.RemoveFromCollection(payload, settings.AccessToken);
+        }
         public void RemoveEpisodeFromCollection(TraktSettings settings, Series series, EpisodeFile episodeFile)
         {
             var payload = new TraktCollectShowsResource

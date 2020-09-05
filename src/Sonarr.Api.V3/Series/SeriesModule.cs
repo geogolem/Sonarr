@@ -255,7 +255,7 @@ namespace Sonarr.Api.V3.Series
 
         public void Handle(EpisodeFileDeletedEvent message)
         {
-            if (message.Reason == DeleteMediaFileReason.Upgrade) return;
+            if (message.Reason == DeleteMediaFileReason.Upgrade || message.Reason == DeleteMediaFileReason.SeriesDeletion) return;
 
             BroadcastResourceChange(ModelAction.Updated, message.EpisodeFile.SeriesId);
         }
