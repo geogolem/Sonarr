@@ -37,7 +37,6 @@ namespace NzbDrone.Core.Notifications.Trakt
             var request = BuildTraktRequest("sync/collection", HttpMethod.POST, accessToken);
 
             request.Headers.ContentType = "application/json";
-            var temp = payload.ToJson();
             request.SetContent(payload.ToJson());
 
             try
@@ -94,10 +93,9 @@ namespace NzbDrone.Core.Notifications.Trakt
         public HttpRequest BuildTraktRequest(string resource, HttpMethod method, string accessToken)
         {
             var request = new HttpRequestBuilder(URL).Resource(resource).Build();
-
-            request.Headers.Accept = HttpAccept.Json.Value;
             request.Method = method;
 
+            request.Headers.Accept = HttpAccept.Json.Value;            
             request.Headers.Add("trakt-api-version", "2");
             request.Headers.Add("trakt-api-key", ClientId);
 
