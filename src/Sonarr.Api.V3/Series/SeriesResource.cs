@@ -64,6 +64,8 @@ namespace Sonarr.Api.V3.Series
         public Ratings Ratings { get; set; }
 
         public SeriesStatisticsResource Statistics { get; set; }
+
+        public bool? EpisodesChanged { get; set; }
     }
 
     public static class SeriesResourceMapper
@@ -149,7 +151,7 @@ namespace Sonarr.Api.V3.Series
                        AirTime = resource.AirTime,
                        Images = resource.Images,
 
-                       Seasons = resource.Seasons.ToModel(),
+                       Seasons = resource.Seasons?.ToModel() ?? new List<Season>(),
                        Year = resource.Year,
 
                        Path = resource.Path,
